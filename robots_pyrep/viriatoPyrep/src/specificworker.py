@@ -30,7 +30,7 @@ from pyrep.robots.mobiles.youbot import YouBot
 from pyrep.objects.vision_sensor import VisionSensor
 from pyrep.objects.dummy import Dummy
 from pyrep.objects.shape import Shape
-from pyrep.objects.shape import Object
+from pyrep.objects.object import Object
 from pyrep.objects.joint import Joint
 
 import numpy as np
@@ -56,9 +56,9 @@ class SpecificWorker(GenericWorker):
         
         #self.robot = Viriato()
         self.robot = YouBot()
-        self.robot_object = Object("youBot")
-        self.robot_left_arm = Object("viriato_left_arm")
-        self.robot_left_arm_tip = Object("viriato_left_arm_tip")
+        self.robot_object = Shape("youBot")
+        self.robot_left_arm = Shape("viriato_left_arm")
+        self.robot_left_arm_tip = Dummy("viriato_left_arm_tip")
 
         self.cameras = {}
         # cam = VisionSensor("camera_1_rgbd_sensor")
