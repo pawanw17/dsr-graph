@@ -22,8 +22,6 @@ RUN curl -S https://raw.githubusercontent.com/robocomp/robocomp/development/clas
 RUN git clone https://github.com/ryanhaining/cppitertools /usr/local/include/cppitertools
 RUN git clone https://github.com/pybind/pybind11
 RUN cd ~/pybind11 && mkdir build && cd build && cmake .. && make -j$(nproc) && make install
-# ICE fix
-COPY Connection.h /usr/include/Ice/Connection.h
 
 # Last version of g++ gcc and cmake
 RUN apt install -y cmake gcc-10 g++-10
@@ -48,7 +46,7 @@ USER robolab
 WORKDIR /home/robolab/robocomp/components/
 RUN git clone --progress https://github.com/robocomp/dsr-graph.git 
 WORKDIR /home/robolab/robocomp/components/dsr-graph/components/
-#RUN mkdir build && cd build && cmake .. && make -j$(nproc)
+RUN sed -i 's/opencv4/opencv3/g' viriatoDSR/src/CMakeListsSpecific.txt && sed -i 's/opencv4/opencv3/g' change_graph/src/CMakeListsSpecific.txt &&mkdir build && cd build && cmake .. && make -j$(nproc)
 WORKDIR /home/robolab/robocomp/components/dsr-graph/
 
 # Installation of Coppelia Sim
